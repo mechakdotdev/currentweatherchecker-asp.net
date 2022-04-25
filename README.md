@@ -1,0 +1,2 @@
+# currentweatherchecker-asp.net
+Current Weather Checker made using .NET 6, ASP.NET which consumes the OpenWeatherMap API to get current weather conditions for cities around the world.
