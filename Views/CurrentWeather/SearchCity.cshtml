@@ -1,0 +1,26 @@
+﻿@model CurrentWeatherApp.WeatherModels.SearchCity
+
+@{
+    ViewData["Title"] = "SearchCity";
+}
+
+<div class="container">
+
+    <form method="post">
+
+        <div class="container">
+            <div class="form-group col-md-offset-3 col-md-5">
+                <h2>Enter a City Name To Check The Weather</h2>
+                <label class="form-label">City To Find:</label>
+                <input asp-for="UserInput" class="form-control" placeholder="Enter a city to search for"/>
+                <span asp-validation-for="UserInput" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-md-offset-3">
+                <button asp-controller="CurrentWeather" asp-action="SearchCity" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+
+</div>

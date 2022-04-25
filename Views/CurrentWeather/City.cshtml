@@ -1,0 +1,54 @@
+﻿@model CurrentWeatherApp.WeatherModels.City
+
+@{
+    ViewData["Title"] = "City";
+}
+
+<div class="container">
+
+    <div class="container">
+
+        <div class="form-group col-md-offset-3 col-md-5">
+
+            <h2>Attrax: Current Weather Application</h2>
+            
+            <label class="form-label">City:</label>
+            <span>@Model.Name</span>
+            <br />
+
+            <label class="form-label">Temperature:</label>
+            <span class="bg-">@Model.Temperature °C</span>
+            <br />
+            
+            <label class="form-label">Humidity:</label>
+            <span class="bg-">@Model.Humidity %</span>
+            <br />
+            
+            <label class="form-label">Pressure:</label>
+            <span class="bg-">@Model.Pressure Hpa</span>
+            <br />
+            
+            <label class="form-label">Wind Speed:</label>
+            <span class="bg-">@Model.WindSpeed km/h</span>
+            <br />
+            
+            <label class="form-label">Weather:</label>
+            <span class="bg-">@Model.Weather</span>
+
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <div class="col-md-offset-3">
+
+            <form method="get">
+                <button asp-controller="CurrentWeather" asp-action="SearchCity" class="btn btn-success">Back</button>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
