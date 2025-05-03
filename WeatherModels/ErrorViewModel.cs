@@ -1,4 +1,4 @@
-namespace CurrentWeatherApp.Models
+namespace CurrentWeatherApp.WeatherModels
 {
     public class ErrorViewModel
     {
