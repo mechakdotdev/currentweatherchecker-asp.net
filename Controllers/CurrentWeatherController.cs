@@ -1,55 +1,50 @@
 ﻿using CurrentWeatherApp.Repositories;
-using CurrentWeatherApp.Views.OpenWeatherModels;
 using CurrentWeatherApp.WeatherModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CurrentWeatherApp.Controllers
+namespace CurrentWeatherApp.Controllers;
+
+public class CurrentWeatherController : Controller
 {
-    public class CurrentWeatherController : Controller
+    private readonly IWeatherRepository _weatherRepository;
+
+    public CurrentWeatherController(IWeatherRepository weatherRepository)
     {
-        private readonly IWeatherRepository _weatherRepository;
-        
-        // Dependency injection
-        public CurrentWeatherController(IWeatherRepository weatherRepository)
-        {
-            _weatherRepository = weatherRepository;
-        }
+        _weatherRepository = weatherRepository;
+    }
 
-        [HttpGet]
-        public IActionResult SearchCity()
-        {
-            var viewModel = new SearchCity();
-            return View(viewModel);
-        }
+    [HttpGet]
+    public IActionResult SearchCity()
+    {
+        return View(new SearchCity());
+    }
 
-        [HttpPost]
-        public IActionResult SearchCity(SearchCity searchCity)
-        {
-            if (ModelState.IsValid)
-            {
-                return RedirectToAction("City", "CurrentWeather", new { city = searchCity.UserInput });
-            }
-
+    [HttpPost]
+    public IActionResult SearchCity(SearchCity searchCity)
+    {
+        if (!ModelState.IsValid)
             return View(searchCity);
-        }
 
-        [HttpGet]
-        public IActionResult City(string city)
+        return RedirectToAction(nameof(City), new { city = searchCity.UserInput });
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> City(string city)
+    {
+        var response = await _weatherRepository.GetCurrentWeather(city);
+                
+        if (response is null) return NotFound();
+
+        var viewModel = new City
         {
-            OpenWeatherResponse openWeatherResponse = _weatherRepository.GetCurrentWeather(city).Result;
-            City viewModel = new();
+            Name = response.Name,
+            Humidity = response.Main.Humidity,
+            Pressure = response.Main.Pressure,
+            Temperature = response.Main.Temp,
+            Weather = response.Weather.First().Main,
+            WindSpeed = response.Wind.Speed
+        };
 
-            if (openWeatherResponse != null)
-            {
-                viewModel.Name = openWeatherResponse.Name;
-                viewModel.Humidity = openWeatherResponse.Main.Humidity;
-                viewModel.Pressure = openWeatherResponse.Main.Pressure;
-                viewModel.Temperature = openWeatherResponse.Main.Temp;
-                viewModel.Weather = openWeatherResponse.Weather[0].Main;
-                viewModel.WindSpeed = openWeatherResponse.Wind.Speed;
-            }
-
-            return View(viewModel);
-        }
+        return View(viewModel);
     }
 }

@@ -1,9 +1,9 @@
-﻿using CurrentWeatherApp.Views.OpenWeatherModels;
+﻿using CurrentWeatherApp.OpenWeatherModels;
 
 namespace CurrentWeatherApp.Repositories
 {
     public interface IWeatherRepository
     {
-        Task<OpenWeatherResponse> GetCurrentWeather(string city);
+        Task<OpenWeatherResponse?> GetCurrentWeather(string city);
     }
 }
