@@ -1,12 +1,19 @@
-﻿namespace CurrentWeatherApp.Views.OpenWeatherModels
+﻿namespace CurrentWeatherApp.OpenWeatherModels
 {
     public class OpenWeatherResponse
     {
-        public int Id { get; set; }
-        public string? Name { get; set; }
-        public Main Main { get; set; }
-        public Wind Wind { get; set; }
-        public List<Weather> Weather { get; set; }
+        public OpenWeatherResponse(List<Weather> weather, Wind wind, Main main, string? name)
+        {
+            Weather = weather;
+            Wind = wind;
+            Main = main;
+            Name = name;
+        }
+
+        public string? Name { get; }
+        public Main Main { get; }
+        public Wind Wind { get; }
+        public List<Weather> Weather { get; }
 
     }
 }

@@ -1,8 +1,12 @@
-﻿namespace CurrentWeatherApp.Views.OpenWeatherModels
+﻿namespace CurrentWeatherApp.OpenWeatherModels
 {
     public class Wind
     {
-        public double Speed { get; set; }
-        public int Degrees { get; set; }
+        public Wind(double speed)
+        {
+            Speed = speed;
+        }
+
+        public double Speed { get; }
     }
 }

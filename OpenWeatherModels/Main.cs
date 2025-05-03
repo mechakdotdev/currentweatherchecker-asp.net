@@ -1,11 +1,16 @@
-﻿namespace CurrentWeatherApp.Views.OpenWeatherModels
+﻿namespace CurrentWeatherApp.OpenWeatherModels
 {
     public class Main
     {
-        public double Temp { get; set; }
-        public int Pressure { get; set; }
-        public int Humidity { get; set; }
-        public double Temp_Min { get; set; }
-        public double Temp_Max { get; set; }
+        public Main(double temp, int pressure, int humidity)
+        {
+            Temp = temp;
+            Pressure = pressure;
+            Humidity = humidity;
+        }
+
+        public double Temp { get; }
+        public int Pressure { get; }
+        public int Humidity { get; }
     }
 }
